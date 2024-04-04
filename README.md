@@ -5,6 +5,10 @@
 - Header
 - Login Page
 - Sign In and Sign Up form
+- useRef Hook
+- Firebase Setup
+- Deploying our app to production
+- Create signUp User Account
 
 # Features
 
