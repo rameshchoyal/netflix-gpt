@@ -29,6 +29,10 @@
 - In Secondary Component we build Movie List and Movie card
 - Used TMDB image CDN url
 - Made the browse page look good with css
+- Add GPT button in header
+- GPT search page
+- GPT search bar
+- Multi language feature for search bar
 
 # Features
 

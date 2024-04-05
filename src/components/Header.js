@@ -4,11 +4,19 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removerUser } from "../Utils/userSlice";
+import { toggleGptSearchView } from "../Utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../Utils/constants";
+import { changeLanguage } from "../Utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const isShowGptSearch = useSelector((store) => store.gpt.showGptSearch);
+
+  const toggleGptSearch = () => {
+    dispatch(toggleGptSearchView());
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -38,6 +46,10 @@ const Header = () => {
         // An error happened.
       });
   };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
   return (
     <div className="absolute w-screen bg-gradient-to-b from-black py-2 px-8 z-10 flex justify-between">
       <img
@@ -47,8 +59,29 @@ const Header = () => {
       />
       {user && (
         <div className="flex my-7">
+          {isShowGptSearch && (
+            <select
+              className="bg-gray-700 text-white px-1 rounded-lg mx-2 "
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            className="bg-purple-700 text-white px-1 rounded-lg mx-2"
+            onClick={toggleGptSearch}
+          >
+            {!isShowGptSearch ? "GPT Search" : "Homepage"}
+          </button>
           <img className="w-8 h-8 mx-2" src={user?.photoURL} alt="usericon" />
-          <button className="text-white font-bold" onClick={handleSignOut}>
+          <button
+            className="text-white font-bold bg-red-500 px-1 rounded-lg mx-2"
+            onClick={handleSignOut}
+          >
             Sign Out
           </button>
         </div>
