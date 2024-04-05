@@ -7,7 +7,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../Utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
 
@@ -20,8 +19,6 @@ const Login = () => {
   const name = useRef(null);
 
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const toggleSignIN = () => {
     setIsSignIn(!isSignIN);
@@ -46,7 +43,7 @@ const Login = () => {
           updateProfile(user, {
             displayName: name.current.value,
             photoURL:
-              "https://avatars.githubusercontent.com/u/72539623?s=400&u=d883574c5b6755b2144b26305bf54f5a6ff66cef&v=4",
+              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -59,8 +56,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -80,8 +75,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;

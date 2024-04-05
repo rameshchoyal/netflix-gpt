@@ -9,6 +9,22 @@
 - Firebase Setup
 - Deploying our app to production
 - Create signUp User Account
+- Implement Sign In user Api
+- Created Redux store with userSlice
+- Implemented Sign Out
+- Update Profile
+- Bug fix "navigate inside OnAuth"
+- Unsubscribed to the onAuthStateChanged callback
+- Add hardcoded value to the constants file
+- Get data from TMDB now playing movies list API
+- Custom Hooks for Now Playing Movies
+- Create movieSlice
+- Uddate Store with movie Data
+- Planning for MainContainer and Secondary container
+- Fetch Data for Trailer Video
+- Update Store with Trailer video Data
+- Embedded the youtube video with mute to auto play
+- used Tailwind to make browse- title and video good
 
 # Features
 

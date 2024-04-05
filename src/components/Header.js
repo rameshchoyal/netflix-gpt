@@ -1,17 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Utils/firebase";
-import { signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removerUser } from "../Utils/userSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removerUser());
+        navigate("/");
+      }
+    });
+    return () => unsubscribe;
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         // An error happened.
       });
@@ -25,7 +47,7 @@ const Header = () => {
       />
       {user && (
         <div className="flex my-7">
-          <img className="w-7 h-7 mx-2" src={user?.photoURL} alt="usericon" />
+          <img className="w-8 h-8 mx-2" src={user?.photoURL} alt="usericon" />
           <button className="text-white font-bold" onClick={handleSignOut}>
             Sign Out
           </button>
