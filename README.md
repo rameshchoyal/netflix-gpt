@@ -25,6 +25,10 @@
 - Update Store with Trailer video Data
 - Embedded the youtube video with mute to auto play
 - used Tailwind to make browse- title and video good
+- Build Secondary Component
+- In Secondary Component we build Movie List and Movie card
+- Used TMDB image CDN url
+- Made the browse page look good with css
 
 # Features
 
