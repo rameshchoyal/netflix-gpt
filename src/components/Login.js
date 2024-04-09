@@ -85,14 +85,18 @@ const Login = () => {
     }
   };
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header />
-      <div className="absolute">
-        <img src={BACKGROUND_URL} alt="background" />
+      <div className="flex flex-1 relative overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover"
+          src={BACKGROUND_URL}
+          alt="background"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="bg-black absolute w-3/12 p-12 mx-auto right-0 left-0 my-32 text-white rounded-lg bg-opacity-80"
+        className="bg-black absolute w-screen md:w-3/12 p-12  md:mx-auto right-0 left-0 my-32 text-white rounded-lg bg-opacity-80"
       >
         <h1 className="text-3xl font-bold pb-4">
           {isSignIN ? "Sign In" : "Sign Up"}

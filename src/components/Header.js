@@ -51,14 +51,14 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
   return (
-    <div className="absolute w-screen bg-gradient-to-b from-black py-2 px-8 z-10 flex justify-between">
+    <div className="absolute inset-x-0 top-0 bg-gradient-to-b  from-black py-2 px-8 z-10 flex flex-col md:flex-row justify-between ">
       <img
-        className="w-48 "
+        className="w-48 mx-auto md:mx-0 "
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         alt="logo"
       />
       {user && (
-        <div className="flex my-7">
+        <div className="flex flex-wrap my-1 md:my-7 justify-between">
           {isShowGptSearch && (
             <select
               className="bg-gray-700 text-white px-1 rounded-lg mx-2 "
@@ -72,14 +72,18 @@ const Header = () => {
             </select>
           )}
           <button
-            className="bg-purple-700 text-white px-1 rounded-lg mx-2"
+            className="bg-purple-700 text-white px-2 md:px-1 rounded-lg mx-2"
             onClick={toggleGptSearch}
           >
             {!isShowGptSearch ? "GPT Search" : "Homepage"}
           </button>
-          <img className="w-8 h-8 mx-2" src={user?.photoURL} alt="usericon" />
+          <img
+            className="hidden md:inline-block w-8 h-8 mx-2"
+            src={user?.photoURL}
+            alt="usericon"
+          />
           <button
-            className="text-white font-bold bg-red-500 px-1 rounded-lg mx-2"
+            className="text-white font-bold bg-red-500 px-2 md:px-1 rounded-lg mx-2"
             onClick={handleSignOut}
           >
             Sign Out
