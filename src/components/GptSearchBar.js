@@ -34,7 +34,7 @@ const GptSearchBar = () => {
 
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
     });
     if (!gptResults.choices) {
       //Error Handling
